@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+
+ruby '2.1.4'
 gem 'rails', '4.2.2'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '~> 5.0'
@@ -36,4 +38,4 @@ group :production do
 end
 
 
-
+ 
