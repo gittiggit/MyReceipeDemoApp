@@ -17,4 +17,3 @@
 /tmp
 # Ignore all cloud9 and hidden files 
 .c9/
-Gemfile.lock
