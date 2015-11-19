@@ -1,21 +1,2 @@
-<p>
-    <h1>Create a new receipe</h1>
-    <hr/>
-</p>
-
-<div class="row">
-    <div class="well col-md-8 col-md-offset-2" >
-       <%= form_for @receipe do |ob| %>
-       <%= ob.label :name %>
-       <%= ob.text_field :name %>
-       
-       <%= ob.label :summary %>
-       <%= ob.text_field :summary%>
-       
-       <%= ob.label :description %>
-       <%= ob.text_area :description, rows: 10 %>
-       
-       <%= ob.submit "Create receipe", class:"btn btn-success" %>
-       <% end %>
-    </div>
-</div>
+<%= render "shared/page_title", title: "Create a new receipe" %>
+<%= render 'form' %>

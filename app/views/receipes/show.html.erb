@@ -1,6 +1,4 @@
-<p>
-    <h1><%= @receipe.name %></h1>
-</p>
+<%= render "shared/page_title", title: @receipe.name %>
 <div class="row">
     <div class="col-md-4 pull-right center">
     <%= gravatar_for @receipe.chef, size: 200 %>
@@ -9,12 +7,13 @@
     </p>
     </div>
     <div class="col-md-8">
+        <%= link_to "Edit the receipe", edit_receipe_path(@receipe), class:"btn btn-success pull-right" %>
         <h3><%= @receipe.summary %>
             <div class="well">
                 <p>
                 <strong>Steps:</strong>
                 </p>
-                <h5><%= @receipe.description %></h5>
+                <h5><%= simple_format(@receipe.description) %></h5>
             </div>    
         </h3>
     </div>
