@@ -15,6 +15,15 @@
 <%= yield %>
 
 <%= render "layouts/footer" %>
+<hr/>
+<div class="row">  
+    <div class="col-md-2">
+        <section class="chef_info center">
+           <%= debug(params) if Rails.env.development? %>
+        </section>
+    </div>
+    
+</div>
 </div>
 </body>
 </html>

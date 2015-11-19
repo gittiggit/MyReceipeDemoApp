@@ -1,0 +1,20 @@
+<h1>All Receipes</h1>
+<hr/>
+<% @receipe.each do |r| %>
+<div class="row">
+    <div class="col-md-2">
+        <section class="chef_info center">
+            <%= gravatar_for r.chef, size: 100 %>
+            <h5>Chef name: <%= r.chef.chefname %></h5>
+        </section>
+    </div>
+    <div class="col-md-8 well">
+        <h4><%= link_to r.name, receipe_path(r) %></h4>
+         <p><%= r.summary %></p>
+         <p>
+            <span class='quiet'><small><%= time_ago_in_words(r.created_at) %> ago</small></span>    
+         </p>     
+    </div>
+</div>
+<hr/>
+<% end %>

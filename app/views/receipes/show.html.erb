@@ -1,0 +1,23 @@
+<p>
+    <h1><%= @receipe.name %></h1>
+</p>
+<div class="row">
+    <div class="col-md-4 pull-right center">
+    <%= gravatar_for @receipe.chef, size: 200 %>
+    <p>
+     <h5>Brought to you by <%= @receipe.chef.chefname %></h5>    
+    </p>
+    </div>
+    <div class="col-md-8">
+        <h3><%= @receipe.summary %>
+            <div class="well">
+                <p>
+                <strong>Steps:</strong>
+                </p>
+                <h5><%= @receipe.description %></h5>
+            </div>    
+        </h3>
+    </div>
+</div>
+
+<h5><%= link_to "return to Receipes Listing", receipes_path, class: "btn btn-primary btn-small" %></h5>
