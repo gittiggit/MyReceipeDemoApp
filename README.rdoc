@@ -3,26 +3,79 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+// uploading image
+in the gemfile
+gem 'mini_magick', '3.8.0'
+gem 'carrierwave'
+// run the command 
+=> rails generate uploader Picture
+- will generate create  app/uploaders/picture_uploader.rb
 
-* Ruby version
+=> rails generate migration add_picture_to_receipes picture:string
+-go to receipe model
+add the codes:
 
-* System dependencies
+#mount_uploader :picture, PictureUploader
+- in the form partial midify the form:
+# <%= form_for(@receipe, html: {multipart: true}) do |ob| %>
 
-* Configuration
+- to add an image uploader in the form partial
+#<span class="picture">
+#          <%= f.file_field :picture, accept: "image/jpeg,image/gif,image/png" %>
+#     </span>
 
-* Database creation
+- whitelist the receipe controller's receipe params
+#private
+#    def receipe_params
+#        params.require(:receipe).permit(:name, :summary, :description, :picture)
+#    end
 
-* Database initialization
+- in the index.html.erb page: to retrieve the picture
+#<div class="col-md-4">
+#        <% image_tag(r.picture.url, size: "250x150", class: "gravatar") if r.picture? %>
+#    </div>
 
-* How to run the test suite
+- in the show.html page: to retrieve the picture
+#<div class="show_receipe">
+#            <%= image_tag(@receipe.picture.url, class: "gravatar") if @receipe.picture? %>
+#        </div>
 
-* Services (job queues, cache servers, search engines, etc.)
+- in the picture_uploader.rb uncomment the following lines
+ # def extension_white_list
+ #   %w(jpg jpeg gif png)
+ # end
+ 
+ - then add the validation for the picture in the serverside and to do this add the following codes to 
+ - the Receipe model
+# validate :picture_size
+    
+#    private
+#       def picture_size
+#           if picture.size > 5.megabytes
+#                errors.add(:picture, "should be less than 5MB")
+#            end
+#       end
 
-* Deployment instructions
+- for client side validation add the following jquery code to the form partial 
+#<script type="text/javascript">
+#    $('#receipe_picture').bind('change', function() {
+#        size_in_megabytes = this.files[0].size/1024/1024;
+#        if(size_in_megabytes > 5){
+#            alert('Maximum file size is 5MB. Please choose a similar file');
+#        }
+#    });
+#</script>
 
-* ...
 
+ 
+///// resizing image using image magic
+- in the terminal
+=> sudo apt-get update
+=> sudo apt-get install imagemagick --fix-missing
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+- in the picture_uploader.rb include the following lines of code
+#include CarrierWave::MiniMagick
+#process resize_to_limit: [600, 600]
+
+- in the config/environments.rb include the following lines of code
+#require 'carrierwave/orm/activerecord'

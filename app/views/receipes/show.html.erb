@@ -9,6 +9,9 @@
     <div class="col-md-8">
         <%= link_to "Edit the receipe", edit_receipe_path(@receipe), class:"btn btn-success pull-right" %>
         <h3><%= @receipe.summary %>
+        <div class="show_receipe">
+            <%= image_tag(@receipe.picture.url, class: "gravatar") if @receipe.picture? %>
+        </div>
             <div class="well">
                 <p>
                 <strong>Steps:</strong>
