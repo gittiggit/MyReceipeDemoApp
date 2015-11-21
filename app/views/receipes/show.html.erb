@@ -16,7 +16,15 @@
                 <p>
                 <strong>Steps:</strong>
                 </p>
-                <h5><%= simple_format(@receipe.description) %></h5>
+                <%= simple_format(@receipe.description) %>
+                <div class="pull-right">
+                    <%= link_to like_receipe_path(@receipe, like: true), method: :post do %>
+                     <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= @receipe.thumbs_up_total %>
+                    <% end %> &nbsp&nbsp&nbsp&nbsp
+                     <%= link_to like_receipe_path(@receipe, like: false), method: :post do %>
+                     <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp <%= @receipe.thumbs_down_total %>
+                    <% end %>
+                </div>
             </div>    
         </h3>
     </div>

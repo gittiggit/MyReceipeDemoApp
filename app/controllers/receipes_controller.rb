@@ -1,7 +1,9 @@
 class ReceipesController < ApplicationController
     def index
-        @receipe = Receipe.all
+      #  @receipe = Receipe.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+      @receipe = Receipe.all.paginate(page: params[:page], per_page: 4)
     end
+    
     def show
    #  binding.pry
    @receipe  = Receipe.find(params[:id])
@@ -37,6 +39,17 @@ class ReceipesController < ApplicationController
         else
          render :edit        
         end
+    end
+    def like
+       @receipe = Receipe.find(params[:id])
+       like = Like.create(like: params[:like], chef: Chef.first, receipe: @receipe)
+       if like.valid?
+          flash[:success] = "Your selection was successful"
+          redirect_to :back
+       else
+          flash[:danger] = " you can only like/dislike a receipe once"
+          redirect_to :back
+       end
     end
     
     private
