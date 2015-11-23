@@ -1,13 +1,18 @@
 <%= render "shared/page_title", title: @receipe.name %>
 <div class="row">
     <div class="col-md-4 pull-right center">
-    <%= gravatar_for @receipe.chef, size: 200 %>
+    <%= link_to gravatar_for(@receipe.chef, size: 200), chef_path(@receipe.chef) %>
     <p>
      <h5>Brought to you by <%= @receipe.chef.chefname %></h5>    
     </p>
     </div>
     <div class="col-md-8">
+        
+        <!--// if the receipe belongs to the current user, then show the edit link-->
+        <% if logged_in? and @receipe.chef == current_user %>
         <%= link_to "Edit the receipe", edit_receipe_path(@receipe), class:"btn btn-success pull-right" %>
+        <% end %>
+        
         <h3><%= @receipe.summary %>
         <div class="show_receipe">
             <%= image_tag(@receipe.picture.url, class: "gravatar") if @receipe.picture? %>

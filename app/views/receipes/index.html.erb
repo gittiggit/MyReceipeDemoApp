@@ -1,5 +1,12 @@
 <%= render "shared/page_title", title: "All receipes" %>
-
+<ul class="nav nav-tabs">
+    <li class="active">
+        <%= link_to "Recipes", receipes_path%>
+    </li> 
+     <li>
+        <%= link_to "Chefs", chefs_path %>
+    </li> 
+</ul>
 <%= will_paginate @receipe %>
 
 <hr/>
@@ -7,7 +14,7 @@
 <div class="row">
     <div class="col-md-2">
         <section class="chef_info center">
-            <%= gravatar_for r.chef, size: 100 %>
+            <%= link_to gravatar_for(r.chef, size: 100), chef_path(r.chef) %>
             <h5>Chef name: <%= r.chef.chefname %></h5>
         </section>
     </div>
